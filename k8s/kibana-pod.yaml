@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+  labels:
+    app: kibana
+  name: kibana
+spec:
+  containers:
+  - image: docker.elastic.co/kibana/kibana:6.8.3
+    name: kibana
+    ports:
+    - containerPort: 5601

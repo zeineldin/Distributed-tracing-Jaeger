@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: jaeger
+  name: jaeger
+spec:
+  containers:
+  - env:
+    - name: ES_SERVER_URLS
+      value: http://elasticsearch:9200
+    - name: ES_TAGS_AS_FIELDS_ALL
+      value: "true"
+    - name: SPAN_STORAGE_TYPE
+      value: elasticsearch
+    image: jaegertracing/all-in-one:1.12
+    name: jaeger
+    ports:
+    - containerPort: 6831
+    - containerPort: 16686

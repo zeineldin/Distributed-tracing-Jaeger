@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: hotrod
+  name: hotrod
+spec:
+  containers:
+  - args:
+    - all
+    env:
+    - name: JAEGER_AGENT_HOST
+      value: jaeger
+    - name: JAEGER_AGENT_PORT
+      value: "6831"
+    image: jaegertracing/example-hotrod:latest
+    name: hotrod
+    ports:
+    - containerPort: 8080
+    - containerPort: 8081
+    - containerPort: 8082
+    - containerPort: 8083
