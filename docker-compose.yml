@@ -1,0 +1,58 @@
+version: '3.7'
+services:
+  jaeger:
+    image: jaegertracing/all-in-one:1.12
+    ports:
+      - "6831:6831"
+      - "16686:16686"
+    environment:
+      - SPAN_STORAGE_TYPE=elasticsearch
+      - ES_SERVER_URLS=http://elasticsearch:9200
+      - ES_TAGS_AS_FIELDS_ALL=true
+    container_name: jaeger
+    restart: on-failure
+ #   networks:
+ #     - jaeger-example
+    depends_on:
+      - elasticsearch
+      - kibana
+      - hotrod
+
+  elasticsearch: 
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.3
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports: 
+      - "9200:9200"
+      - "9300:9300"
+ #   networks:
+ #     - jaeger-example
+
+  kibana: 
+    image: docker.elastic.co/kibana/kibana:6.8.3
+    container_name: kibana
+    restart: on-failure
+    ports: 
+      - "5601:5601"
+ #   networks:
+ #     - jaeger-example
+
+  hotrod:
+    image: jaegertracing/example-hotrod:latest
+    restart: on-failure
+    ports: 
+      - "8080:8080"
+      - "8081:8081"
+      - "8082:8082"
+      - "8083:8083"
+    command: ["all"]
+    environment:
+      - JAEGER_AGENT_HOST=jaeger
+      - JAEGER_AGENT_PORT=6831
+#    networks:
+#      - jaeger-example
+    container_name: hotrod
+#networks:
+#  jaeger-example:
