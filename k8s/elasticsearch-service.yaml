@@ -5,14 +5,10 @@ metadata:
     app: elasticsearch
   name: elasticsearch
 spec:
+  type: NodePort
   ports:
-  - name: "9200"
-    port: 9200
+  - port: 9200
+    name: 
     targetPort: 9200
-  - name: "9300"
-    port: 9300
-    targetPort: 9300
   selector:
     app: elasticsearch
-status:
-  loadBalancer: {}

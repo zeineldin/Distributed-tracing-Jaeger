@@ -5,11 +5,10 @@ metadata:
     app: kibana
   name: kibana
 spec:
+  type: NodePort
   ports:
-  - name: "5601"
+  - name: http
     port: 5601
     targetPort: 5601
   selector:
     app: kibana
-status:
-  loadBalancer: {}

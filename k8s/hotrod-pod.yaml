@@ -10,7 +10,7 @@ spec:
     - all
     env:
     - name: JAEGER_AGENT_HOST
-      value: jaeger
+      value: jaeger:16686
     - name: JAEGER_AGENT_PORT
       value: "6831"
     image: jaegertracing/example-hotrod:latest

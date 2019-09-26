@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hotrod
+  namespace: jaeger
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/add-base-url: "true"
+    kubernetes.io/ingress.allow-http: "true"
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+spec:
+  rules:
+  - host: <URL>
+    http:
+      paths:
+        - backend:
+            serviceName: hotrod
+            servicePort: 8080

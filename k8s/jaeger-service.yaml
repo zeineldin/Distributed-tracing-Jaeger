@@ -5,6 +5,7 @@ metadata:
     app: jaeger
   name: jaeger
 spec:
+  type: NodePort
   ports:
   - name: "6831"
     port: 6831
@@ -14,5 +15,3 @@ spec:
     targetPort: 16686
   selector:
     app: jaeger
-status:
-  loadBalancer: {}
